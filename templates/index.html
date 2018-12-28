@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<!-- Reference for loading the spinning icon -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+* {box-sizing: border-box}
+
+/* Set height of body and the document to 100% */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+.buttonload {
+  border: none; /* Remove borders */
+  color: white; /* White text */
+  padding: 6px 12px; /* Some padding */
+  font-size: 16px; /* Set a font-size */
+  float: right;
+}
+
+/* Add a right margin to each loading icon */
+.fa {
+  margin-left: 0px;
+  margin-right: 8px;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #d6d6d6;
+  color: black;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 17px;
+  width: 33.33%;
+}
+
+.tablink:hover {
+  background-color: #ddd9d9;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: black;
+  display: none;
+  padding: 70px 20px;
+  height: 100%;
+}
+
+#CNN {background-color: #eeeeee;}
+#Twitter {background-color: #eeeeee;}
+#About {background-color: #eeeeee;}
+
+.loadButton {
+  border: none;
+  color: white;
+  padding: 4px 12px;
+  font-size: 14px;
+  margin-top: -12px;
+  float: right;
+}
+
+.red_line {
+  border-color: #a70000;
+  background-color: #a70000;
+  border-width: 0.5px;
+}
+
+.blue_line {
+  border-color: #0097f2;
+  background-color: #0097f2;
+  border-width: 0.5px;
+}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/functions.js"></script>
+
+<!-- Housing for global variables -->
+<script>
+  var isLoading = 0;
+  var isDataLoaded = 0;
+  var url_cnn = "http://localhost:5000/fetch_cnn";
+  var url_twitter = "http://localhost:5000/fetch_twitter";
+</script>
+
+</head>
+
+<body style="background-color:#eeeeee">
+
+<div id="tabs">
+  <button class="tablink" onclick="openPage('CNN', this, '#eeeeee')">CNN</button>
+
+  <button class="tablink" onclick="openPage('Twitter', this, '#eeeeee')">Twitter</button>
+
+  <button class="tablink" onclick="openPage('About', this, '#eeeeee')" id="defaultOpen">About</button>
+
+  <div id="CNN" class="tabcontent">
+    <button id="cnn_load" class="loadButton" onclick="reloadContent('cnn')"
+    style="background-color: #a70000">
+      Reload
+    </button>
+    <h3 id=header>Articles</h3>
+    <div id="cnn_content" style="text-align:left">No content</div>
+  </div>
+
+  <div id="Twitter" class="tabcontent">
+    <button id="twitter_load" class="loadButton" onclick="reloadContent('twitter')"
+    style="background-color: #0097f2">
+      Reload
+    </button>
+    <h3>Tweets</h3>
+    <div id="twitter_content" style="text-align:left">No content</div>
+  </div>
+
+  <div id="About" class="tabcontent">
+    <div id="about-header" style="text-align:left">
+      <h3>Trump Tracker</h3>
+      <p style="text-align:left;margin-left:1px;font size:14px">
+        For all your Trump tracking needs! With this tool you can follow the latest CNN articles on Donald Trump and also his official tweets.<br>
+        Use the 'Reload' button to load the latest content. This process might take some time.<br>
+        (Note: In case the site takes too long to respond, please refresh the page and try again.)
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+function openPage(pageName,elmnt,color) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+  document.getElementById(pageName).style.display = "block";
+  elmnt.style.backgroundColor = color;
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+</script>
+
+</body>
+</html>
