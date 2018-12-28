@@ -1,0 +1,5 @@
+python3
+flask
+selenium
+beautifulsoup4
+firefox
