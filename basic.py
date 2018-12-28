@@ -1,4 +1,4 @@
-import fetcher, romanov, tweety
+import romanov, tweety
 from flask import Flask, render_template
 from flask_cors import CORS
 
